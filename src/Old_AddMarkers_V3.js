@@ -73,23 +73,8 @@ const AddMarkers = () => {
       });
 
       if (matchedLocation) {
+        callback(matchedLocation.nimi);
         console.log(matchedLocation.nimi);
-        // Etsi lähin sijainti ja aseta nimi
-       let closestLocation = null;
-        let closestDistance = Number.MAX_VALUE;
-
-        lopputulosData.forEach(location => {
-        const lat = location.lat[0];
-        const lon = location.lon[0];
-        const distance = latlng.distanceTo([lat, lon]);
-
-        if (distance < closestDistance) {
-        closestDistance = distance;
-        closestLocation = location;
-        }
-        });
-        callback(closestLocation.nimi);
-        console.log(closestLocation.nimi);
       } else {
         callback(null);
       }
@@ -108,7 +93,7 @@ const AddMarkers = () => {
               {marker.iconType === "owl" ? `merkki ${i+1}` : marker.iconType === "vwbeetle" ? `merkki ${i+1}` : `merkki ${i+1}`}<br />
               Leveys koordinaatit : {marker.lat.toFixed(6)} , <br />
               Pituus koordinaatit : {marker.lng.toFixed(6)} <br />
-              Alle 10 km sisällä oleva lähin sijainti: {marker.locationName ? marker.locationName : "Ei saatavilla"} <br />
+              Lähellä oleva sijainti: {marker.locationName ? marker.locationName : "Ei saatavilla"} <br />
               Etäisyys seuraavan pisteeseen : {i < markers.length - 1 ? calculateDistance(i, i + 1) : "Ei saatavilla"}
             </span>
           </Popup>
