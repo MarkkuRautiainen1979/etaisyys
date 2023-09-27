@@ -49,12 +49,12 @@ const AddMarkers = () => {
     if (index1 < 0 || index2 < 0 || index1 >= markers.length || index2 >= markers.length) {
       return "Invalid markers";
     }
-
+  
     const latlng1 = L.latLng(markers[index1].lat, markers[index1].lng);
     const latlng2 = L.latLng(markers[index2].lat, markers[index2].lng);
-    const distanceInMeters = latlng1.distanceTo(latlng2);
-    return distanceInMeters.toFixed(2) + " metriä";
-  };
+    const distanceInKilometers = latlng1.distanceTo(latlng2) / 1000; // Muunna metrit kilometreiksi
+    return distanceInKilometers.toFixed(1) + " kilometriä"; // Yksi desimaali kilometreissä
+   };
 
   const fetchLocationName = async (latlng, callback) => {
     try {
